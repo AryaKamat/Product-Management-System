@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+// Variables
+$font-family: 'Poppins', sans-serif;
+$primary-color: #4ca6c7;
+$secondary-color: #2B547E;
+$white-color: #fff;
+$highlight-color: #FFA500;
+$text-color: #1c456d;
+$link-color: #f1f1f1;
+
+// Mixins
+@mixin padding($value) {
+  padding: $value;
+}
+
+@mixin border-radius($value) {
+  border-radius: $value;
+}
+
+@mixin background($color) {
+  background: $color;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Global Styles
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: $font-family;
+}
+
+.logo2 {
+  width: 50px;
+  float: left;
+}
+
+.navbar {
+  @include padding(20px);
+  @include background($primary-color);
+}
+
+.navbar .navbar-toggler {
+  @include background($white-color);
+  @include border-radius(50%);
+  @include padding(15px);
+  outline: none;
+  border: none;
+}
+
+.navbar #navbarNav {
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.navbar .collapse {
+  @include background($secondary-color);
+}
+
+.navbar .dropdown-menu {
+  width: 12px;
+}
+
+.navbar .dropdown-menu li a {
+  color: $text-color;
+  font-size: 15px;
+}
+
+.navbar ul li .bi {
+  @include background($white-color);
+  color: $text-color;
+  font-weight: bold;
+  @include padding(10px 15px);
+  @include border-radius(50%);
+}
+
+.navbar ul li a {
+  color: $link-color;
+  text-decoration: none;
+  text-transform: capitalize;
+  font-size: 18px;
+  margin-right: 40px;
+
+  &:hover {
+    color: $highlight-color;
+  }
+}

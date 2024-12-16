@@ -1,0 +1,212 @@
+/* fonts  */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+$font-family: 'Poppins', sans-serif;
+$background-color: #fdfdfd;
+$box-shadow-color: rgba(0, 0, 0, 0.1);
+$box-shadow-color2: rgba(0, 0, 0, 0.5);
+$primary-color: #2B547E;
+$secondary-color: #f1f1f1;
+$text-color: #555;
+$btn-color: #fff;
+$message-color: rebeccapurple;
+
+//mixins
+@mixin box-shadow($color1, $color2) {
+    box-shadow: 0 0 128px 0 $color1, 0 32px 64px -48px $color2;
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin text-center {
+    text-align: center;
+}
+
+@mixin button-style($bg-color, $text-color, $hover-opacity) {
+    background-color: $bg-color;
+    color: $text-color;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover {
+        opacity: $hover-opacity;
+    }
+}
+
+@mixin responsive($media) {
+    @media only screen and (max-width: $media) {
+        @content;
+    }
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: $font-family;
+}
+
+.container {
+    @include flex-center;
+    min-height: 100vh;
+}
+
+.box {
+    background: $background-color;
+    @include flex-column;
+    padding: 35px 35px;
+    border-radius: 20px;
+    @include box-shadow($box-shadow-color, $box-shadow-color2);
+}
+
+.form-box {
+    width: 450px;
+    margin: 50px 10px;
+
+    header {
+        font-size: 40px;
+        font-weight: 600;
+        @include text-center;
+        color: $primary-color;
+    }
+
+    hr {
+        background-color: $primary-color;
+        height: 5px;
+        width: 20%;
+        border: none;
+        margin: 5px auto;
+        outline: 0;
+        border-radius: 5px;
+    }
+}
+
+.input-container {
+    @include flex-center;
+    width: 80%;
+    margin-bottom: 15px;
+
+    .icon {
+        padding: 15px;
+        background: transparent;
+        color: $text-color;
+        background-color: $secondary-color;
+        min-width: 50px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .input-field {
+        width: 100%;
+        padding: 10px;
+        height: 50px;
+        outline: none;
+        border: none;
+        font-size: 15px;
+        background-color: $secondary-color;
+        
+        &:focus {
+            color: $primary-color;
+        }
+    }
+}
+
+.btn {
+    height: 45px;
+    width: 80%;
+    padding: 0 15px;
+    margin: auto;
+    font-size: 18px;
+    @include button-style($primary-color, $btn-color, 0.7);
+}
+
+.links {
+    margin: 25px;
+    @include text-center;
+
+    a {
+        text-decoration: none;
+        color: $primary-color;
+        
+        &:hover {
+            font-weight: bold;
+        }
+    }
+}
+
+/* home page  */
+.nav {
+    background-color: #fff;
+    @include flex-center;
+    flex-direction: row;
+    justify-content: space-around;
+    line-height: 60px;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+}
+
+.right-links a {
+    padding: 0 10px;
+}
+
+main {
+    @include flex-center;
+    margin-top: 60px;
+}
+
+.main-box {
+    @include flex-column;
+    width: 70%;
+
+    .top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .bottom {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    @include responsive(840px) {
+        .top {
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .box {
+            margin: 10px 10px;
+        }
+
+        .bottom {
+            margin-top: 0;
+        }
+    }
+}
+
+.message {
+    text-align: left;
+    padding: 15px 0px;
+    color: $message-color;
+}

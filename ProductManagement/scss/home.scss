@@ -1,0 +1,241 @@
+// Variables
+$main-color: #34aae4;
+$bg-color: #dad7d7;
+$text-color: #000000;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$shadow-hover-color: rgba(0, 0, 0, 0.2);
+$transition-time: 0.5s;
+$font-size-large: 50px;
+$font-size-medium: 20px;
+$font-size-small: 15px;
+$font-size-xsmall: 12px;
+$border-radius: 5px;
+$box-shadow: 0 2px 5px $shadow-color;
+$hover-box-shadow: 0 0 20px 0px $shadow-hover-color;
+
+// Mixins
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin box-shadow($shadow: $box-shadow) {
+  box-shadow: $shadow;
+}
+
+@mixin responsive($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+// Styles
+.home-text h1 {
+  font-size: $font-size-large;
+  text-align: center;
+}
+
+.home-text p {
+  font-size: $font-size-medium;
+  color: $text-color;
+  margin-top: 5px;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.con {
+  @include flex-center(row, space-between);
+  flex-wrap: wrap;
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card {
+  flex: 1 0 30%;
+  margin: 10px;
+  padding: 10px;
+  background-color: $main-color;
+  opacity: 0.8;
+  @include box-shadow();
+  border-radius: $border-radius;
+  text-align: center;
+
+  &:hover {
+    @include box-shadow($hover-box-shadow);
+  }
+}
+
+.card-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  line-height: 1.5;
+  font-size: $font-size-small;
+}
+
+.image-cap {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+// Contact form section
+.section {
+  padding: 40px 20px;
+  text-align: left;
+}
+
+.wrapper {
+  width: 100%;
+  background: $bg-color;
+  padding: 25px;
+  border-radius: $border-radius;
+  @include box-shadow(4px 4px 2px rgb(5, 5, 5));
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #080808;
+  }
+
+  .input_field {
+    margin-bottom: 10px;
+
+    input[type="text"],
+    textarea {
+      border: 1px solid #e0e0e0;
+      width: 100%;
+      padding: 10px;
+    }
+
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+  }
+}
+
+#error_message {
+  margin-bottom: 20px;
+  background: #fe8b8e;
+  padding: 0;
+  text-align: center;
+  font-size: 14px;
+  transition: all $transition-time ease;
+}
+
+#contact {
+  background: $main-color;
+}
+
+.main {
+  @include flex-center(wrap);
+}
+
+.footer {
+  padding: 20px 0;
+}
+
+.logo1 {
+  width: 80px;
+  margin-bottom: 30px;
+  margin-left: 25px;
+}
+
+.list {
+  width: 25%;
+
+  h4 {
+    font-size: 21px;
+    color: black;
+    margin-bottom: 30px;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: 2px;
+      width: 60px;
+      left: 0;
+      bottom: -10px;
+      background: $bg-color;
+    }
+  }
+
+  ul li:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
+
+// Responsive styles
+@include responsive(700px) {
+  .text-box h1 {
+    font-size: 40px;
+  }
+}
+
+@include responsive(400px) {
+  .home-text p {
+    font-size: $font-size-xsmall;
+  }
+}
+
+@include responsive(768px) {
+  .contact-form {
+    width: 100%;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: calc(100% - 20px);
+  }
+}
+
+@include responsive(1040px) {
+  .list {
+    width: 50%;
+    margin-bottom: 12px;
+    margin-left: 5px;
+  }
+}
+
+@include responsive(575px) {
+  .list {
+    width: 100%;
+  }
+
+  :root {
+    --big-font: 3.8rem;
+    --h2-font: 1.8rem;
+    transition: 0.2s;
+  }
+}
+
+@include responsive(768px) {
+  .con {
+    flex-direction: column;
+  }
+
+  .card {
+    flex: 1 0 100%;
+  }
+}

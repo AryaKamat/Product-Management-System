@@ -1,0 +1,377 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Titillium+Web:wght@400;700&display=swap");
+
+/* Variables */
+$font-primary: 'Montserrat', sans-serif;
+$font-secondary: 'Titillium Web', serif;
+$color-primary: #0a0808;
+$color-secondary: #ee5908;
+$color-background: #f4f5f6;
+$color-menu-bg: #f9f9f9;
+$color-link: #427dad;
+$color-highlight: #0c88a0;
+$color-menu-item-hover: #f3f1f0;
+$color-mega-menu-bg: #f4f5f6;
+$color-mega-menu-border: #fcfeff;
+$color-menu-items: #050505;
+$transition-time: 0.3s;
+
+/* Mixins */
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin transition($property: all, $time: $transition-time, $ease: ease-in-out) {
+  transition: $property $time $ease;
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-primary;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  background: $color-background;
+  position: relative;
+  max-width: 100%;
+  margin: auto;
+  @include flex-center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  z-index: 1;
+  
+  a {
+    text-decoration: none;
+    color: $color-primary;
+  }
+
+  ul {
+    list-style: none;
+  }
+}
+
+img {
+  width: 50px;
+}
+
+.menu-items {
+  @include flex-center;
+}
+
+.menu-items li {
+  padding: 0.5rem 1rem;
+  
+  &:hover {
+    background-color: $color-secondary;
+  }
+}
+
+.menu-btn {
+  color: $color-menu-items;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu,
+.menu-right {
+  position: absolute;
+  background: $color-menu-bg;
+  width: 200%;
+  top: 100px;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  @include transition(all, $transition-time);
+}
+
+.menu-right {
+  top: 0;
+  left: 110%;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.dropdown:hover .dropdown-menu {
+  top: 34px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-right:hover .menu-right {
+  left: 100%;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mega Menu */
+.mega-menu {
+  position: absolute;
+  left: 0;
+  width: 80vw;
+  top: 80px;
+  opacity: 0;
+  visibility: hidden;
+  @include transition(all, $transition-time);
+  
+  .content {
+    background: $color-mega-menu-bg;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    
+    .col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      line-height: 3rem;
+      
+      .img-wrapper {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 20vw;
+        overflow: hidden;
+        
+        .img {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        }
+        
+        img {
+          width: 100%;
+          @include transition(transform);
+        }
+        
+        &:hover img {
+          transform: scale(1.1);
+        }
+      }
+      
+      h2 {
+        color: $color-menu-items;
+        font-size: 1.2rem;
+        line-height: 3rem;
+        font-weight: bold;
+      }
+      
+      p {
+        line-height: 1.2rem;
+      }
+      
+      .mega-links {
+        border-left: 1px solid $color-mega-menu-border;
+      }
+      
+      .read-more {
+        display: inline-block;
+        padding-top: 1rem;
+        color: $color-link;
+        @include transition(color);
+        
+        &:hover {
+          color: $color-menu-item-hover;
+        }
+      }
+      
+      .mega-links li,
+      .mega-links li a {
+        padding: 0 1rem;
+      }
+    }
+  }
+}
+
+.menu-items li:hover .mega-menu {
+  top: 50px;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Section */
+.section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  @include flex-center;
+  text-align: center;
+  background: url(beach.jpg);
+  background-size: cover;
+  
+  h1 {
+    font-family: $font-secondary;
+    font-size: 100px;
+    line-height: 6vw;
+    color: $color-highlight;
+    text-transform: uppercase;
+  }
+}
+
+/* Nav Menu Button */
+.menu-btn {
+  position: relative;
+  display: none;
+  @include flex-center;
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+  z-index: 2;
+
+  &__lines {
+    width: 1.5rem;
+    height: 0.1rem;
+    background: #ffffff;
+    @include transition(all, 0.5s);
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 1.5rem;
+      height: 0.1rem;
+      background: #ffffff;
+      @include transition(all, 0.5s);
+    }
+
+    &::before {
+      transform: translateY(-0.5rem);
+    }
+
+    &::after {
+      transform: translateY(0.5rem);
+    }
+  }
+
+  &.open .menu-btn__lines {
+    transform: translateX(2rem);
+    background: transparent;
+
+    &::before {
+      transform: rotate(45deg) translate(-1.5rem, 1.5rem);
+      background: #ffffff;
+    }
+
+    &::after {
+      transform: rotate(-45deg) translate(-1.5rem, -1.5rem);
+      background: #ffffff;
+    }
+  }
+}
+
+/* Media Query */
+@media screen and (max-width: 970px) {
+  .menu-btn {
+    display: flex;
+  }
+
+  .header .menu-items {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    max-width: 350px;
+    top: 100%;
+    right: 0;
+    background: #eff1f3;
+    display: block;
+    padding: 1rem;
+    line-height: 3rem;
+    overflow-y: auto;
+    transform: translateY(-100vh);
+    @include transition(transform);
+  }
+
+  .menu-items.open {
+    transform: translateY(0);
+  }
+
+  .menu-items li {
+    margin: 15px 10px;
+    
+    a {
+      padding: 0 1rem;
+      display: block;
+      font-size: 1.4rem;
+    }
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  /* Dropdown, Mega Menus */
+  .menu-items .dropdown-menu,
+  .menu-items .menu-right,
+  .menu-items .mega-menu {
+    position: static;
+    opacity: 1;
+    top: 4rem;
+    visibility: visible;
+    padding-left: 1rem;
+    width: 100%;
+    max-height: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    overflow: hidden;
+    @include transition(all, 0.2s);
+  }
+
+  .expand-btn.open + .expandable {
+    max-height: 100%;
+    transform: scaleY(1);
+  }
+
+  .expandable li {
+    margin: 0;
+
+    a {
+      font-size: 1rem;
+    }
+  }
+
+  .mega-menu .content {
+    grid-template-columns: auto;
+    padding: 1rem 1rem 0 1rem;
+
+    .col {
+      width: 100%;
+      padding-top: 1rem;
+      margin-bottom: 0.5rem;
+      border-top: 1px solid #1a3246;
+
+      &:nth-child(1) {
+        border-top: 0px;
+      }
+
+      .mega-links {
+        border-left: 0px;
+        padding-left: 1rem;
+      }
+
+      li {
+        margin: 0;
+      }
+    }
+  }
+}

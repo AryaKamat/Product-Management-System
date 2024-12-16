@@ -1,0 +1,48 @@
+// Variables
+$navbar-background: #2B547E;
+$icon-color: #1c456d;
+$icon-font-weight: bold;
+$icon-padding: 10px 15px;
+$icon-border-radius: 50%;
+$link-color: #f1f1f1;
+$link-text-decoration: none;
+$link-font-size: 18px;
+$link-margin-right: 40px;
+
+// Mixins
+@mixin navbar-collapse-style {
+    background: $navbar-background;
+}
+
+@mixin icon-style {
+    color: $icon-color;
+    font-weight: $icon-font-weight;
+    padding: $icon-padding;
+    border-radius: $icon-border-radius;
+}
+
+@mixin link-style {
+    color: $link-color;
+    text-decoration: $link-text-decoration;
+    font-size: $link-font-size;
+    margin-right: $link-margin-right;
+}
+
+// SCSS Code
+.navbar {
+    .collapse {
+        @include navbar-collapse-style;
+    }
+
+    ul {
+        li {
+            .bi {
+                @include icon-style;
+            }
+
+            a {
+                @include link-style;
+            }
+        }
+    }
+}
